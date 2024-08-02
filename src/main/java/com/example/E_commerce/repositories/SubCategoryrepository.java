@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.E_commerce.models.SubCategory;
 
 @Repository
-public interface SubCategoryrepository extends JpaRepository<SubCategory, Long> {
+public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> {
 
 }

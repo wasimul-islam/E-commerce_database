@@ -5,44 +5,36 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.E_commerce.models.Customer;
-import com.example.E_commerce.services.CustomerService;
+import com.example.E_commerce.models.Category;
+import com.example.E_commerce.services.CategoryService;
 
 @RestController
-@RequestMapping("/customer")
-public class CustomerController {
-	
+@RequestMapping("/category")
+public class CategoryController {
+
 	@Autowired
-	private CustomerService customerService;
+	private CategoryService categoryService;
 	
 	@PostMapping("/add")
-	public ResponseEntity<?> addCustomer(@RequestBody Customer customer )
+	public ResponseEntity<?> addCategory(@RequestBody Category category )
 	{
 		
-		return customerService.add(customer);	
+		return categoryService.addCategory(category);	
 	}
 	
 	@GetMapping("/get-all")
 	public ResponseEntity<?> getAll()
 	{
-		return customerService.getAll();
-	}
-	
-	@PutMapping("/update")
-	public ResponseEntity<?> update(Long id, Customer customer)
-	{
-		return customerService.update(id, customer);
+		return categoryService.getAll();
 	}
 	
 	@DeleteMapping("/delete")
-	public ResponseEntity<?> delete(Long id)
+	public ResponseEntity<?> deleteCategory(Long id)
 	{
-		return customerService.delete(id);
+		return categoryService.deleteCategory(id);
 	}
-	
 }
