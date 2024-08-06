@@ -19,6 +19,7 @@ public class PaymentController {
 	
 	@Autowired
 	private PaymentService paymentService; 
+	
 	@PostMapping("/add")
 	public ResponseEntity<?> addPayment(@RequestBody Payment payment)
 	{

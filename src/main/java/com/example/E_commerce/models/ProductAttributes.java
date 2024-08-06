@@ -2,7 +2,6 @@ package com.example.E_commerce.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,9 +13,6 @@ public class ProductAttributes extends Root {
 	
 	@Column
 	private int attributeValue;
-	
-	@ManyToOne
-	private Product product;
 
 	public String getAttributeName() {
 		return attributeName;
@@ -34,13 +30,6 @@ public class ProductAttributes extends Root {
 		this.attributeValue = attributeValue;
 	}
 
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
 	
 	
 }

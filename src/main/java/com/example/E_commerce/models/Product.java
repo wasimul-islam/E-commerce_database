@@ -1,8 +1,13 @@
 package com.example.E_commerce.models;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,6 +21,10 @@ public class Product extends Root {
 	@ManyToOne
 	private SubCategory subCategory;
 	
+	@OneToMany(cascade = CascadeType.MERGE)
+	@JoinColumn(name="attribute_id", referencedColumnName="id")
+	List<ProductAttributes> productAttributeList;
+
 	@Column
 	private int price;
 	
@@ -24,6 +33,14 @@ public class Product extends Root {
 	
 	@Column
 	private int stockCount;
+	
+	public List<ProductAttributes> getProductAttributeList() {
+		return productAttributeList;
+	}
+
+	public void setProductAttributeList(List<ProductAttributes> productAttributeList) {
+		this.productAttributeList = productAttributeList;
+	}
 
 	public String getName() {
 		return name;

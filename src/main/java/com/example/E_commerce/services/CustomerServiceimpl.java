@@ -38,6 +38,7 @@ public class CustomerServiceimpl implements CustomerService {
 		Optional<Customer> optionalCustomer = customerRepository.findById(id);
 		if(optionalCustomer.isPresent()) {
 			optionalCustomer.get().setEmail(customer.getEmail().trim());
+			customerRepository.save(optionalCustomer.get());
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseMessage("Not Found"));
 		

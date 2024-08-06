@@ -1,6 +1,7 @@
 package com.example.E_commerce.services;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,14 +9,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.E_commerce.models.Order;
+import com.example.E_commerce.models.Product;
 import com.example.E_commerce.models.ResponseMessage;
 import com.example.E_commerce.repositories.OrderRepository;
+import com.example.E_commerce.repositories.ProductRepository;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
 	private OrderRepository orderRepository;
+	@Autowired
+	private ProductRepository productRepository;
 
 	@Override
 	public ResponseEntity<?> addOrder(Order order) {
@@ -26,6 +31,9 @@ public class OrderServiceImpl implements OrderService {
 		}
 		else {
 			orderRepository.save(order);
+			Optional<Product> optionalProduct = productRepository.findById(order.getProduct().getId());
+			optionalProduct.get().setStockCount(optionalProduct.get().getStockCount()-order.getQuantity());
+			productRepository.save(optionalProduct.get());
 		}
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseMessage("Order added"));
 	}
